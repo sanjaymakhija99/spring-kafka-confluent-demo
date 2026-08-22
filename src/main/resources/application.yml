@@ -1,0 +1,48 @@
+# ==============================================================================
+# Application configuration
+# ------------------------------------------------------------------------------
+# All Confluent Cloud connection details are read from ENVIRONMENT VARIABLES
+# so that no secrets are ever committed to source control. Set these before
+# running the app (see README.md for full instructions):
+#
+#   export KAFKA_BOOTSTRAP_SERVERS="pkc-xxxxx.region.provider.confluent.cloud:9092"
+#   export KAFKA_API_KEY="your-confluent-cloud-api-key"
+#   export KAFKA_API_SECRET="your-confluent-cloud-api-secret"
+#
+# ==============================================================================
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: spring-kafka-confluent-demo
+
+  kafka:
+    # Confluent Cloud bootstrap server endpoint
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+
+    # Custom properties consumed by KafkaProducerConfig / KafkaConsumerConfig
+    properties:
+      sasl:
+        api-key: ${KAFKA_API_KEY:CHANGE_ME_API_KEY}
+        api-secret: ${KAFKA_API_SECRET:CHANGE_ME_API_SECRET}
+
+    consumer:
+      group-id: ${KAFKA_CONSUMER_GROUP_ID:order-message-consumer-group}
+
+# Application-specific settings
+app:
+  kafka:
+    # Topic used for both producing and consuming in this demo.
+    # Create this topic in your Confluent Cloud cluster first
+    # (see README.md), e.g.: demo-messages
+    topic: ${KAFKA_TOPIC:demo-messages}
+
+# Logging: show INFO level logs from our app and Spring Kafka so producer/
+# consumer activity is easy to observe in the console.
+logging:
+  level:
+    com.example.kafkademo: INFO
+    org.apache.kafka: WARN
+    org.springframework.kafka: INFO
