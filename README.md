@@ -1,14 +1,13 @@
 # Spring Kafka + Confluent Cloud Demo
 
-@Author sanjay
+@Author sanjay m
 
 A small, self-contained Spring Boot (Maven) project that shows how to
 **produce** and **consume** messages using a **Confluent Cloud** managed
 Kafka cluster, with important production-grade Kafka features enabled and
 documented in the code.
 
-Add detais about the features and configuration in the README, so that anyone can clone the repo, set a few environment variables, and run the app to see a
-full produce → Confluent Cloud → consume round trip.
+
 
 ## What this project demonstrates
 
